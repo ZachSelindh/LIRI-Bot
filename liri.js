@@ -92,26 +92,33 @@ function doWhatItSays() {
         } else {
                 // Splits the string, seperated by a comma, into an array.
             let data = response.split(",");
-            let x = data[1];
-            doSpotify(x);
+            var comDo = data[0]
+            var searchDo = data[1];
+            LIRIswitch(comDo, searchDo);
         };
     });
 };
 
-/* Switch statment that uses the command variable to run the correct function. */
-switch(command) {
-    case "spotify-this-song":
-        doSpotify(searchInput);
-        break;
-    case "concert-this":
-        doBandsInTown(searchInput);
-        break;
-    case "movie-this":
-        doOMDB(searchInput);
-        break;
-    case "do-what-it-says":
-        doWhatItSays(searchInput);
-        break;
-    default:
-        break;
+function LIRIswitch(command, searchInput) {
+    switch(command) {
+        case "spotify-this-song":
+            doSpotify(searchInput);
+            break;
+        case "concert-this":
+            doBandsInTown(searchInput);
+            break;
+        case "movie-this":
+            doOMDB(searchInput);
+            break;
+        default:
+            break;
+    };
 };
+
+/* Switch statment that uses the command variable to run the correct function. */
+if (command === "do-what-it-says") {
+    doWhatItSays(searchInput);
+} else {
+    LIRIswitch(command, searchInput);
+};
+
