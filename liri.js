@@ -1,7 +1,6 @@
 // Javascript file for LIRI-bot Node assignment
 
 require("dotenv").config();
-
 var Spotify = require("node-spotify-api");
 const keys = require("./keys.js");
 const axios = require("axios");
@@ -11,19 +10,9 @@ const request = require("request");
 
 let spotify = new Spotify(keys.spotify);
 
-let input = process.argv;
 let command = process.argv[2];
-let searchInput = "";
-
-    /* For Loop to take in the console input and convert it to a new variable */
-for (i = 3; i < input.length; i++) {
-        /* Checks if multiple words follow the command, and adds a "+" instead of spaces. */
-    if (i > 3 && i < input.length) {
-        searchInput = searchInput + "+" + input[i];
-    } else {
-        searchInput += input[i];
-    };
-};
+    // Turns the array of search terms into a single string seperated by '+'
+let searchInput = process.argv.slice(3).join("+");
 
     /* Spotify API function */
 function doSpotify(input) {
@@ -75,6 +64,8 @@ function doOMDB(input) {
         var movie = input;
     }
     let url = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+        // Using request module, because axios threw multiple errors using their API,
+        // and I wanted to practice a different module.
     request(url, function(error, response, body) {
         if (error) {
             console.log("Error: " + error);
@@ -99,6 +90,7 @@ function doWhatItSays() {
         if (error) {
             console.log("Error: " + error);
         } else {
+                // Splits the string, seperated by a comma, into an array.
             let data = response.split(",");
             let x = data[1];
             doSpotify(x);
