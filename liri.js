@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 
-const Spotify = require("node-spotify-api");
+var Spotify = require("node-spotify-api");
 const keys = require("./keys.js");
 const axios = require("axios");
 const fs = require("fs");
@@ -25,14 +25,28 @@ for (i = 3; i < input.length; i++) {
     };
 };
 
+    /* Spotify API function */
 function doSpotify() {
-    let song = searchInput;
+    if (searchInput === "") {
+        var song = "the+sign+ace+of+base";
+    } else {
+        var song = searchInput;
+    }
     spotify.search({
         type: "track",
         query: song,
         limit: 1
     }, function(err, response) {
-
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("* - * - * - * - * - * - * - * - *");
+            console.log("Artist(s): " + response.tracks.items[0].artists[0].name);
+            console.log("Track: " + response.tracks.items[0].name);
+            console.log("Preview Link: " + response.tracks.items[0].preview_url);
+            console.log("Album: " + response.tracks.items[0].album.name);
+            console.log("* - * - * - * - * - * - * - * - *");
+        };
     });
 };
 
@@ -49,6 +63,7 @@ function doBandsInTown() {
     });
 };
 
+    /* OMDB function */
 function doOMDB() {
     if (searchInput === "") {
         var movie = "mr+nobody";
@@ -61,21 +76,22 @@ function doOMDB() {
             console.log(err);
         } else {
             console.log("* - * - * - * - * - * - * - * - *");
-        console.log("Title: " + JSON.parse(body).Title);
-        console.log("Year: " + JSON.parse(body).Year);
-        console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-        console.log("Country: " + JSON.parse(body).Country);
-        console.log("Language: " + JSON.parse(body).Language);
-        console.log("Plot: " + JSON.parse(body).Plot);
-        console.log("Actors: " + JSON.parse(body).Actors);
-        console.log("* - * - * - * - * - * - * - * - *"); 
-        }
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Year: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Country: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors: " + JSON.parse(body).Actors);
+            console.log("* - * - * - * - * - * - * - * - *"); 
+        };
     });
 };
 
+    /* Calls the text in random.txt*/
 function doWhatItSays() {
-
+    
 };
 
 /* Switch statment that uses the command variable to run the correct function. */
