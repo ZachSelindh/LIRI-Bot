@@ -1,6 +1,4 @@
-// Sample text from homework page.
-
-console.log('this is loaded');
+// Spotify API keys, hidden in .env file.
 
 exports.spotify = {
   id: process.env.SPOTIFY_ID,
