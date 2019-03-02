@@ -13,4 +13,6 @@ I used a small collection of npm modules to get this working, including "request
 
 I also used a dotenv file to mask my Spotify API keys.
 
+Here's a link to a YouTube video displaying the working product:
+
 **Private youtube link goes here
