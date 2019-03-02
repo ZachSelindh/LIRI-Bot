@@ -1,5 +1,7 @@
 # LIRI-Bot
-*A LIRI bot CLI using Node.js
+A LIRI bot CLI using Node.js
+
+---
 
 This application takes in four commands:
 -"movie-this", which calls the OMDB API to provide information about a particular movie.
