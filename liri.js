@@ -101,6 +101,9 @@ function doWhatItSays() {
 
 function LIRIswitch(command, searchInput) {
     switch(command) {
+        case "do-what-it-says":
+            doWhatItSays();
+            break;
         case "spotify-this-song":
             doSpotify(searchInput);
             break;
@@ -115,10 +118,5 @@ function LIRIswitch(command, searchInput) {
     };
 };
 
-/* Switch statment that uses the command variable to run the correct function. */
-if (command === "do-what-it-says") {
-    doWhatItSays(searchInput);
-} else {
-    LIRIswitch(command, searchInput);
-};
-
+    /* Start the application */
+LIRIswitch(command, searchInput);
