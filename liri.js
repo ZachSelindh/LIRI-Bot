@@ -26,19 +26,19 @@ for (i = 3; i < input.length; i++) {
 };
 
     /* Spotify API function */
-function doSpotify() {
-    if (searchInput === "") {
+function doSpotify(input) {
+    if (input === "") {
         var song = "the+sign+ace+of+base";
     } else {
-        var song = searchInput;
+        var song = input;
     }
     spotify.search({
         type: "track",
         query: song,
         limit: 1
-    }, function(err, response) {
-        if (err) {
-            console.log("Error: " + err);
+    }, function(error, response) {
+        if (error) {
+            console.log("Error: " + error);
         } else {
             console.log("* - * - * - * - * - * - * - * - *");
             console.log("Artist(s): " + response.tracks.items[0].artists[0].name);
@@ -51,8 +51,12 @@ function doSpotify() {
 };
 
     /* BandsInTown function */
-function doBandsInTown() {
-    let artist = searchInput;
+function doBandsInTown(input) {
+    if (input === "") {
+        var artist = "john+mayer";
+    } else {
+        var artist = input;
+    }
     let url = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     axios.get(url).then(function(response) {
         console.log("* - * - * - * - * - * - * - * - *");
@@ -64,16 +68,16 @@ function doBandsInTown() {
 };
 
     /* OMDB function */
-function doOMDB() {
-    if (searchInput === "") {
+function doOMDB(input) {
+    if (input === "") {
         var movie = "mr+nobody";
     } else {
-        var movie = searchInput;
+        var movie = input;
     }
     let url = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
-    request(url, function(err, response, body) {
-        if (err) {
-            console.log(err);
+    request(url, function(error, response, body) {
+        if (error) {
+            console.log("Error: " + error);
         } else {
             console.log("* - * - * - * - * - * - * - * - *");
             console.log("Title: " + JSON.parse(body).Title);
@@ -91,22 +95,30 @@ function doOMDB() {
 
     /* Calls the text in random.txt*/
 function doWhatItSays() {
-    
+    fs.readFile("./random.txt", "utf8", function(error, response) {
+        if (error) {
+            console.log("Error: " + error);
+        } else {
+            let data = response.split(",");
+            let x = data[1];
+            doSpotify(x);
+        };
+    });
 };
 
 /* Switch statment that uses the command variable to run the correct function. */
 switch(command) {
     case "spotify-this-song":
-        doSpotify();
+        doSpotify(searchInput);
         break;
     case "concert-this":
-        doBandsInTown();
+        doBandsInTown(searchInput);
         break;
     case "movie-this":
-        doOMDB();
+        doOMDB(searchInput);
         break;
     case "do-what-it-says":
-        doWhatItSays;
+        doWhatItSays(searchInput);
         break;
     default:
         break;
