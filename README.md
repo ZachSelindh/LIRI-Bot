@@ -15,4 +15,4 @@ I also used a dotenv file to mask my Spotify API keys.
 
 Here's a link to a YouTube video displaying the working product:
 
-**Private youtube link goes here
+https://youtu.be/86yv9Z0up28
