@@ -13,6 +13,8 @@ This application takes in four commands:
 
 -"do-what-it-says," which uses node's fs module to go inside random.txt and perform the stated request.
 
+
+
 I used a small collection of npm modules to get this working, including "request", "fs", "moment", and "axios".
 
 I also used a dotenv file to mask my Spotify API keys.
@@ -20,3 +22,5 @@ I also used a dotenv file to mask my Spotify API keys.
 Here's a link to a YouTube video displaying the working product:
 
 https://youtu.be/86yv9Z0up28
+
+Thanks for visiting my GitHub page!
